@@ -12,7 +12,12 @@ import java.lang.invoke.MethodType;
 public class Main {
 
     
-    public static void main(String[] args) {
+    /**
+     * main.
+     *
+     * @param args
+     */
+    public static void main(final String... args) {
         try {
             final MethodHandle methodHandle = MethodHandles.lookup().findConstructor(String.class, MethodType.methodType(void.class, String.class));
             String s = (String) methodHandle.invoke("a");
@@ -21,11 +26,11 @@ public class Main {
             
             final MethodHandle methodHandle2 = MethodHandles.lookup().findStatic(Main.class, "create", MethodType.methodType(String.class));
             String s2 = (String) methodHandle2.invoke();
+            String s3 = String.class.cast(methodHandle2.invoke());
             System.out.println("methodHandle2.type().returnType()=" + methodHandle2.type().returnType());
-            System.out.println("s=" + s2);
+            System.out.println("s=" + s3);
             
             Class.forName("java.lang.String");
-            
             
             
         } catch (NoSuchMethodException e) {
@@ -41,6 +46,6 @@ public class Main {
     
     
     public static String create() {
-        return "aaa";
+        return "create";
     }
 }
